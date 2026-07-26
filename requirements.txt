@@ -8,7 +8,7 @@ matplotlib
 cartopy
 
 # Phase2: SOMクラスタリングで導入
-# minisom
+minisom
 
 # Phase3: オートエンコーダ（発展・必要になった場合のみ）
 # torch
