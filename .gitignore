@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+
+# 気象庁からダウンロードするデータ（download.py/parse.pyで再現可能なため管理外）
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep

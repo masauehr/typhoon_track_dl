@@ -1,0 +1,14 @@
+# Phase0: データ取得・前処理
+requests
+pandas
+numpy
+
+# Phase1: 可視化（古典的検証）で導入
+# matplotlib
+# cartopy
+
+# Phase2: SOMクラスタリングで導入
+# minisom
+
+# Phase3: オートエンコーダ（発展・必要になった場合のみ）
+# torch

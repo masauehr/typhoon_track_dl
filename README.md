@@ -3,7 +3,7 @@
 気象庁ベストトラックデータを用いて、東アジアにおける台風進路の月毎の傾向を
 深層学習（自己組織化マップ等）で探究するプロジェクト。
 
-詳しくは [MANUAL.md](MANUAL.md) を参照。
+詳しくは [MANUAL.md](MANUAL.md) / [typhoon-track-dl.md](typhoon-track-dl.md)（pc_docs運用マニュアルのコピー）を参照。
 
 ## 概要
 
@@ -25,13 +25,34 @@
 
 ```
 typhoon_track_dl/
-├── README.md       # このファイル
-├── CLAUDE.md        # Claude Code向けプロジェクト固有ルール
-├── MANUAL.md         # 手法・進め方の詳細
-├── data/             # ベストトラックデータ置き場
-└── notebooks/        # 検証用notebook
+├── README.md          # このファイル
+├── CLAUDE.md          # Claude Code向けプロジェクト固有ルール
+├── MANUAL.md          # 手法・進め方の詳細
+├── requirements.txt   # 依存パッケージ（Phaseごとにコメントで区分）
+├── src/
+│   ├── download.py    # 気象庁ベストトラックzipのダウンロード
+│   └── parse.py       # 固定長テキストのパース → data/processed/best_track.csv
+├── data/
+│   ├── raw/            # ダウンロードした生データ（git管理外）
+│   └── processed/      # パース済みCSV（git管理外）
+└── notebooks/          # 検証用notebook
+```
+
+## セットアップ・実行方法
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+.venv/bin/python src/download.py   # data/raw/bst_all.txt を取得
+.venv/bin/python src/parse.py      # data/processed/best_track.csv を生成
 ```
 
 ## ステータス
 
-2026-07-15 新規作成。データ取得・実装はこれから。
+2026-07-26 Phase0（データ取得・前処理）実装完了。
+気象庁RSMC東京のベストトラック全期間データ（1951〜2026年、台風1955個・
+観測点71223件）をダウンロード・パースするスクリプトを実装。
+令和元年東日本台風（HAGIBIS, 国際番号1919）の最盛期記録
+（中心気圧915hPa・最大風速105kt）が気象庁公表値と一致することを確認済み。
+次はPhase1（月別の目視・統計による傾向確認）。
