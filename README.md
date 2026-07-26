@@ -33,6 +33,7 @@ typhoon_track_dl/
 │   ├── download.py          # 気象庁ベストトラックzipのダウンロード
 │   ├── parse.py             # 固定長テキストのパース → data/processed/best_track.csv
 │   ├── visualize_monthly.py # Phase1: 月別台風トラックの地図可視化
+│   ├── visualize_density.py # Phase1補足: 月別台風通過密度ヒートマップ
 │   └── som_cluster.py       # Phase2: SOMによる進路パターンのクラスタリング
 ├── data/
 │   ├── raw/            # ダウンロードした生データ（git管理外）
@@ -50,6 +51,7 @@ python3 -m venv .venv
 .venv/bin/python src/download.py          # data/raw/bst_all.txt を取得
 .venv/bin/python src/parse.py             # data/processed/best_track.csv を生成
 .venv/bin/python src/visualize_monthly.py # outputs/phase1_monthly_tracks.png を生成
+.venv/bin/python src/visualize_density.py # outputs/phase1_monthly_density.png を生成
 .venv/bin/python src/som_cluster.py       # outputs/phase2_*.png と data/processed/som_assignment.csv を生成
 ```
 
@@ -64,6 +66,16 @@ python3 -m venv .venv
 - **9-10月**: フィリピン近海で発生し、偏西風帯に入って東へ再カーブする経路が明瞭に増加。
 - **11-3月**（台風数最少期）: 発生位置が低緯度側にシフトし、日本まで北上せず南シナ海方面へ
   向かう経路が主流。
+
+上の重ね書き図は線が多いほど濃く見えるが定量的ではないため、月ごとに通過地点を
+グリッド集計し、最も多く通った経路を色の濃淡で示したのが以下の図（月内最大値を1に正規化）:
+
+![月別台風通過密度](outputs/phase1_monthly_density.png)
+
+- **1-2月・11-12月**: フィリピン近海から中国大陸方面へ西進する経路が最頻出。
+- **7-9月**: 日本近海を北上する経路が最も濃く、最頻出パターンが明確に北へシフト。
+- **10月**: フィリピン近海の西進経路がなお濃いが、日本近海への北上経路も並んで現れる
+  （季節の遷移期）。
 
 ## Phase2: SOMクラスタリング（本命）
 

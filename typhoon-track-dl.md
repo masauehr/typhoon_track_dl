@@ -86,6 +86,18 @@ python3 -m venv .venv
 .venv/bin/python src/som_cluster.py
 ```
 
+## Phase1補足（月別通過密度ヒートマップ）
+
+`src/visualize_density.py`: 台風トラックを線分沿いに密に補間して2次元ヒスト
+グラム化・ガウシアン平滑化し、「その月に最も多く通った経路」を月ごとに最大値1へ
+正規化して可視化。配色は dataviz skill の sequential blue ランプを使用。
+1-2月・11-12月はフィリピン近海からの西進が最頻出、7-9月は日本近海への
+北上が最頻出という結果になり、既知の季節傾向と整合。
+
+```bash
+.venv/bin/python src/visualize_density.py
+```
+
 ## ステータス
 
 2026-07-26 Phase2（SOMクラスタリング）完了。月別ノード出現比率がPhase1の

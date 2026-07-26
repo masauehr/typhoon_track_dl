@@ -6,6 +6,7 @@ numpy
 # Phase1: 可視化（古典的検証）で導入
 matplotlib
 cartopy
+scipy
 
 # Phase2: SOMクラスタリングで導入
 minisom
